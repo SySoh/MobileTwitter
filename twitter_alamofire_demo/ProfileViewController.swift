@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
-        if User.current?.id == tweets[indexPath.row].id {
+        if User.current?.id == tweets[indexPath.row].user.id {
             cell.tweet = self.tweets[indexPath.row]
             print("setting cell")
         }

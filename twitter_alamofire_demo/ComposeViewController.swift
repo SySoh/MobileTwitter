@@ -14,14 +14,22 @@ protocol ComposeViewControllerDelegate: class {
 
 
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var textView: UITextView!
     
     weak var delegate: ComposeViewControllerDelegate?
 
     
+    @IBOutlet weak var charCount: UILabel!
     
+    
+    func textViewDidChange(_ textView: UITextView) {
+        charCount.text = String(describing : textView.text.characters.count) + "/140"
+        if textView.text.characters.count > 140 {
+            charCount.textColor = UIColor.red
+        }
+    }
     @IBAction func exitView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -47,6 +55,7 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        textView.delegate = self
 
         // Do any additional setup after loading the view.
     }
