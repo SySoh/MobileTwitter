@@ -1,4 +1,4 @@
-# Project 4 - *Name of App Here*
+# Project 4 - *Tweeter*
 
 **Name of your app** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
@@ -66,7 +66,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## License
 
-Copyright [yyyy] [name of copyright owner]
+Copyright [2017] [Shao Yie Soh]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
