@@ -25,7 +25,7 @@ The following **optional** features are implemented:
 - [ ] User can view their profile in a profile tab
 - [ ] User should display the relative timestamp for each tweet "8m", "7h"
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
-- [ ] Links in tweets are clickable
+- [x] Links in tweets are clickable
 - [ ] User can tap the profile image in any tweet to see another user's profile
 - [ ] Contains the user header view: picture and tagline
 - [ ] Contains a section with the users basic stats: # tweets, # following, # followers
@@ -50,7 +50,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://imgur.com/021saXu.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://imgur.com/1sLciyv.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 

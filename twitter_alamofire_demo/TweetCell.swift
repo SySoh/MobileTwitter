@@ -8,10 +8,11 @@
 
 import UIKit
 import AlamofireImage
+import ActiveLabel
 
 class TweetCell: UITableViewCell {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: ActiveLabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var handleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -25,6 +26,7 @@ class TweetCell: UITableViewCell {
         if tweet.favorited {
             tweet.favorited = false
             tweet.favoriteCount! -= 1
+            likeNumber.text = String(describing: tweet.favoriteCount!)
             favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
             print("unfavorited!")
             APIManager.shared.unfavorite(tweet) { (tweet: Tweet?, error: Error?) in
@@ -37,7 +39,9 @@ class TweetCell: UITableViewCell {
         } else {
             tweet.favorited = true
             tweet.favoriteCount! += 1
+            likeNumber.text = String(describing: tweet.favoriteCount!)
             favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
+            favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .selected)
             print("favorited!")
             APIManager.shared.favorite(tweet) { (tweet: Tweet?, error: Error?) in
                 if let  error = error {
@@ -55,6 +59,7 @@ class TweetCell: UITableViewCell {
         if tweet.retweeted {
             tweet.retweeted = false
             tweet.retweetCount -= 1
+            retweetNumber.text = String(describing: tweet.retweetCount)
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
             print("unfavorited!")
             APIManager.shared.unretweet(tweet) { (tweet: Tweet?, error: Error?) in
@@ -67,6 +72,7 @@ class TweetCell: UITableViewCell {
         } else {
             tweet.retweeted = true
             tweet.retweetCount += 1
+            retweetNumber.text = String(describing: tweet.retweetCount)
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
             print("retweeted!")
             APIManager.shared.retweet(tweet) { (tweet: Tweet?, error: Error?) in
@@ -95,7 +101,11 @@ class TweetCell: UITableViewCell {
     }
     
     func refreshCell(){
+        tweetTextLabel.enabledTypes = [.mention, .hashtag, .url]
         tweetTextLabel.text = tweet.text
+        tweetTextLabel.handleURLTap { (url) in
+            UIApplication.shared.open(url)
+        }
         nameLabel.text = tweet.user.name
         handleLabel.text = tweet.user.screenName
         dateLabel.text = tweet.createdAtString

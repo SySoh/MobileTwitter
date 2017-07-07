@@ -45,6 +45,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if User.current?.id == tweets[indexPath.row].id {
             cell.tweet = self.tweets[indexPath.row]
+            print("setting cell")
         }
         
         return cell
