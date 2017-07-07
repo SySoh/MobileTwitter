@@ -1,17 +1,17 @@
 //
-//  TimelineViewController.swift
+//  ProfileViewController.swift
 //  twitter_alamofire_demo
 //
-//  Created by Charles Hieger on 6/18/17.
+//  Created by Shao Yie Soh on 7/6/17.
 //  Copyright © 2017 Charles Hieger. All rights reserved.
 //
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var tweets: [Tweet] = []
-    
+
     @IBOutlet weak var tableView: UITableView!
     let refreshControl = UIRefreshControl()
     
@@ -20,7 +20,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.dataSource = self
         tableView.delegate = self
-        
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
@@ -37,9 +36,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets.count
     }
@@ -47,7 +43,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
-        cell.tweet = tweets[indexPath.row]
+        if User.current?.id == tweets[indexPath.row].id {
+            cell.tweet = self.tweets[indexPath.row]
+        }
         
         return cell
     }
@@ -76,19 +74,16 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         refreshControl.endRefreshing()
-    }
-    func did(post: Tweet) {
-    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+}
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
 }
